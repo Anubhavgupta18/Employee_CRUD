@@ -34,9 +34,9 @@ const getAll = async (req, res) => {
 
 const destroy = async (req, res) => {
     try {
-        const employee = await employeeService.destroy(req.params.id);
+        const response = await employeeService.destroy(req.params.id);
         return res.status(201).json({
-            success,
+            response,
             message:'Employee deleted successfully'
         });
     } catch (error) {
