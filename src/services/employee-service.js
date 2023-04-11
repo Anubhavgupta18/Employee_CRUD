@@ -24,7 +24,25 @@ class EmployeeService {
             const emergency_contact = await Emergency_contacts.create(emergency_contact_details);
             await employee.addEmergency_contacts(emergency_contact);
             return employee;
-            
+
+        } catch (error) {
+            throw { error };
+            console.log('something went wrong in the repository layer');
+        }
+    }
+    async getAll(o, l) {
+        try {
+            if (l) {
+                l = parseInt(l);
+            }
+            if (o) {
+                o = parseInt(o);
+            }
+            const employees = await Employee.findAll({
+                offset:o,
+                limit:l
+            });
+            return employees;
         } catch (error) {
             throw { error };
             console.log('something went wrong in the repository layer');

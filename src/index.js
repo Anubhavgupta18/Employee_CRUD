@@ -13,7 +13,7 @@ app.listen(PORT, async () => {
     //db.sequelize.sync({ alter: true });
 });
 
-app.use('/employee', EmployeeRoutes);
+app.use('/employees', EmployeeRoutes);
 
 
 
