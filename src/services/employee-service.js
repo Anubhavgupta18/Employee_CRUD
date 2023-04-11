@@ -27,7 +27,7 @@ class EmployeeService {
 
         } catch (error) {
             throw { error };
-            console.log('something went wrong in the repository layer');
+            console.log('something went wrong in the service layer');
         }
     }
     async getAll(o, l) {
@@ -45,7 +45,59 @@ class EmployeeService {
             return employees;
         } catch (error) {
             throw { error };
-            console.log('something went wrong in the repository layer');
+            console.log('something went wrong in the service layer');
+        }
+    }
+
+    async destroy(employeeId) {
+        try {
+            const employee = await Employee.findByPk(employeeId);
+            if (!employee)
+            {
+                throw { error: 'Employee doesnt exist' };
+            }
+            await Employee.destroy({
+                where: {
+                    id: employeeId
+                }
+            });
+            return employee;
+        } catch (error) {
+            throw { error };
+            console.log('something went wrong in the service layer');
+        }
+    }
+
+    async get(employeeId) {
+        try {
+            const employee = await Employee.findByPk(employeeId);
+            if (!employee)
+            {
+                throw { error: 'Employee doesnt exist' };
+            }
+            return employee;
+        } catch (error) {
+            throw { error };
+            console.log('something went wrong in the service layer');
+        }
+    }
+
+    async update(employeeId, data) {
+        try {
+            const employee = await Employee.findByPk(employeeId);
+            if (!employee)
+            {
+                throw { error: 'Employee doesnt exist' };
+            }
+            const response = await Employee.update(data, {
+                where: {
+                    id:employeeId
+                }
+            })
+            return response;
+        } catch (error) {
+            throw { error };
+            console.log('something went wrong in the service layer');
         }
     }
 }
