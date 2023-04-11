@@ -165,7 +165,7 @@ array of employees according to limit specified
 
 **Desc:** Delete Employee
 
-**Route:** `/employees/18`
+**Route:** `/employees/:id`
 
 **Method:** `DELETE`
 
@@ -183,7 +183,7 @@ Employee is deleted from db
 
 **Desc:** Get Employee
 
-**Route:** `/employees/18`
+**Route:** `/employees/:id`
 
 **Method:** `GET`
 
@@ -223,7 +223,7 @@ Employee is fetched
 
 **Desc:** Update Employee(can used to update any details just by adding few similar lines of code)
 
-**Route:** `/employees/18`
+**Route:** `/employees/:id`
 
 **Method:** `PATCH`
 
