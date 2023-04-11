@@ -103,12 +103,17 @@ class EmployeeService {
             {
                 throw { error: 'Employee doesnt exist' };
             }
-            const response = await Employee.update(data, {
-                where: {
-                    id:employeeId
-                }
-            })
-            return response;
+            if (data.name) {
+                employee.name = data.name;
+            }
+            if (data.email) {
+                employee.email = data.email;
+            }
+            if (data.mobile_number) {
+                employee.mobile_number = data.mobile_number;
+            }
+            await employee.save();
+            return employee;
         } catch (error) {
             throw { error };
             console.log('something went wrong in the service layer');

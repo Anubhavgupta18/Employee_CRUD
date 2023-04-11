@@ -221,18 +221,37 @@ Employee is fetched
 
 ---
 
-**Desc:** Update Employee
+**Desc:** Update Employee(can used to update any details just by adding few similar lines of code)
 
 **Route:** `/employees/18`
 
 **Method:** `PATCH`
+
+**Body:**
+```json
+{
+  "name": "richesh punwarrrrr",
+}
+```
+
 
 **Response:**
 Employee is updated
 
 ```json
 {
-    "employee": {},
+    "employee": {
+        "id": 18,
+        "name": "richesh punwarrrrr",
+        "email": "richesh@gmail.com",
+        "jobtitle": "developer",
+        "mobile_number": "9829503713",
+        "address": "kirti nagar",
+        "city": "jodhpur",
+        "state": "rajasthan",
+        "createdAt": "2023-04-11T11:48:01.000Z",
+        "updatedAt": "2023-04-11T16:15:58.597Z"
+    },
     "message": "Employee updated successfully"
 }
 ```
