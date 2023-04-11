@@ -36,7 +36,7 @@ const destroy = async (req, res) => {
     try {
         const employee = await employeeService.destroy(req.params.id);
         return res.status(201).json({
-            employee,
+            success,
             message:'Employee deleted successfully'
         });
     } catch (error) {

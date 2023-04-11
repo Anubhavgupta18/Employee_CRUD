@@ -14,16 +14,29 @@ class EmployeeService {
             };
 
             const employee = await Employee.create(employeeDetails);
-            const emergency_contact_details = {
-                name: data.emergency_contact_name,
-                mobile_number: data.emergency_contact_number,
-                relationship: data.emergency_contact_relationship,
+
+            const primary_emergency_contact_details = {
+                name: data.emergency_contact1_name,
+                mobile_number: data.emergency_contact1_number,
+                relationship: data.emergency_contact1_relationship,
                 employeeId: employee.dataValues.id
             };
+            // const secondary_emergency_contact_details = {
+            //     name: data.emergency_contact2_name,
+            //     mobile_number: data.emergency_contact2_number,
+            //     relationship: data.emergency_contact2_relationship,
+            //     employeeId: employee.dataValues.id
+            // };
 
-            const emergency_contact = await Emergency_contacts.create(emergency_contact_details);
-            await employee.addEmergency_contacts(emergency_contact);
-            return employee;
+            if (primary_emergency_contact_details) {
+                const emergency_contact1 = await Emergency_contacts.create(primary_emergency_contact_details);
+                await employee.addEmergency_contacts(emergency_contact1);
+            }
+            // if (secondary_emergency_contact_details) {
+            //     const emergency_contact2 = await Emergency_contacts.create(secondary_emergency_contact_details);
+            //     await employee.addEmergency_contacts(emergency_contact2);
+            // }
+            return {...employee.dataValues,primary_emergency_contact_details};
 
         } catch (error) {
             throw { error };
@@ -61,7 +74,7 @@ class EmployeeService {
                     id: employeeId
                 }
             });
-            return employee;
+            return true;
         } catch (error) {
             throw { error };
             console.log('something went wrong in the service layer');
@@ -75,7 +88,8 @@ class EmployeeService {
             {
                 throw { error: 'Employee doesnt exist' };
             }
-            return employee;
+            const emergency_contact_details = await employee.getEmergency_contacts();
+            return { ...employee.dataValues, emergency_contact_details };
         } catch (error) {
             throw { error };
             console.log('something went wrong in the service layer');
